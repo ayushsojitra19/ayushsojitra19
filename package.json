@@ -1,0 +1,31 @@
+{
+  "name": "shopit-v2",
+  "version": "1.0.0",
+  "description": "E-Commerce website",
+  "license": "ISC",
+  "author": "ayush sojitra",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node backend/app.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/app.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/app.js",
+    "seeder": "node backend/seeder/seeder.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.9.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.3",
+    "nodemailer": "^8.0.5",
+    "react-helmet-async": "^3.0.0",
+    "react-router": "^7.14.0",
+    "stripe": "^22.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
