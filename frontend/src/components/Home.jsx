@@ -9,7 +9,6 @@ import { useSearchParams } from "react-router-dom";
 import Filters from "./layout/Filters";
 
 const Home = () => {
-
   let [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const keyword = searchParams.get("keyword") || "";
@@ -18,7 +17,7 @@ const Home = () => {
   const category = searchParams.get("category");
   const ratings = searchParams.get("ratings");
 
-  const params = { page , keyword };
+  const params = { page, keyword };
 
   min !== null && (params.min = min);
   max !== null && (params.max = max);
@@ -33,8 +32,8 @@ const Home = () => {
     }
   }, [isError, error]);
 
-
-  const columnSize = keyword ? 4:3
+  // Adjust column size for the ProductItem grid
+  const columnSize = keyword ? 4 : 3;
 
   if (isLoading) return <Loader />;
 
@@ -42,26 +41,36 @@ const Home = () => {
     <>
       <MetaData title={"Welcome to ShopIT"} />
       <div className="row">
+        {/* Sidebar Filters */}
         {keyword && (
-          <div className="col-6 col-md-3 mt-5">
-              <Filters/> 
+          <div className="col-12 col-md-3 mt-5">
+            <Filters />
           </div>
         )}
-        <div className={keyword? "col-6 col-md-9" : "col-6 col-md-12"}>
+
+        {/* Product Listing Area */}
+        <div className={keyword ? "col-12 col-md-9" : "col-12"}>
           <h1 id="products_heading" className="text-secondary">
-            {keyword ? `${data?.products.length} Products found with keyword ${keyword}` : "Latest Products"} 
+            {keyword
+              ? `${data?.products?.length} Products found with keyword: ${keyword}`
+              : "Latest Products"}
           </h1>
 
           <section id="products" className="mt-5">
             <div className="row">
               {data?.products?.map((product) => (
-                <ProductItem key={product._id} product={product} columnSize={columnSize} />
+                <ProductItem 
+                  key={product._id} 
+                  product={product} 
+                  columnSize={columnSize} 
+                />
               ))}
             </div>
           </section>
+
           <CustomPagination
             resPerPage={data?.resPerPage || 4}
-            filteredProductsCount={data?.filteredProductsCount }
+            filteredProductsCount={data?.filteredProductsCount}
           />
         </div>
       </div>
@@ -70,3 +79,4 @@ const Home = () => {
 };
 
 export default Home;
+
